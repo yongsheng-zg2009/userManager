@@ -1,0 +1,10 @@
+CREATE TABLE `userinfo` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `nickname` varchar(100) DEFAULT NULL,
+  `gender` varchar(20) DEFAULT NULL,
+  `age` int(5) DEFAULT NULL,
+  `register_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
