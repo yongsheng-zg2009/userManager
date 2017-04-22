@@ -1,5 +1,6 @@
 package com.cyx.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,13 +9,20 @@ import java.util.Date;
  *
  */
 
-public class UserInfo {
+public class UserInfo implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6563393723571589278L;
 	
 	private String userName;// 用户名
 	private String nickName;
 	private String gender; // 性别
 	private Integer age;
-	private Date registerTime;
+	private Date dtRegisterTime;
+	private Date dtCreateTime;
+	private Date dtLastUpdateTime;
 
 	public Integer getAge() {
 		return age;
@@ -40,13 +48,6 @@ public class UserInfo {
 		this.nickName = nickName;
 	}
 
-	public Date getRegisterTime() {
-		return registerTime;
-	}
-
-	public void setRegisterTime(Date registerTime) {
-		this.registerTime = registerTime;
-	}
 
 	public String getUserName() {
 		return userName;
@@ -55,4 +56,31 @@ public class UserInfo {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public Date getDtRegisterTime() {
+		return dtRegisterTime;
+	}
+
+	public void setDtRegisterTime(Date dtRegisterTime) {
+		this.dtRegisterTime = dtRegisterTime;
+	}
+
+	public Date getDtCreateTime() {
+		return dtCreateTime;
+	}
+
+	public void setDtCreateTime(Date dtCreateTime) {
+		this.dtCreateTime = dtCreateTime;
+	}
+
+	public Date getDtLastUpdateTime() {
+		return dtLastUpdateTime;
+	}
+
+	public void setDtLastUpdateTime(Date dtLastUpdateTime) {
+		this.dtLastUpdateTime = dtLastUpdateTime;
+	}
+
+	
+ 
 }

@@ -5,12 +5,10 @@ import com.cyx.po.UserInfo;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/4/13 0013.
+ * Created by mjg on 2017/4/13 0013.
  */
-
 public interface UserMapper {
+	
     public List<UserInfo>  userList();
-    
-    
     
 }

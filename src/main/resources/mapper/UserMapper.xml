@@ -5,7 +5,17 @@
 <mapper namespace="com.cyx.dao.UserMapper">
 
     <select id="userList" resultType="com.cyx.po.UserInfo">
-        select id,username,nickname,gender,age,register_time registerTime from userinfo
+    
+        SELECT 
+        	user_name AS userName, 
+        	nick_name AS nickName, 
+        	gender AS gender, 
+        	age AS age, 
+        	dt_register_time AS dtRegisterTime,
+        	dt_create_time AS dtCreateTime , 
+        	dt_last_update_time AS dtLastUpdateTime
+         FROM t_um_user
+        
     </select>
     
 </mapper>
