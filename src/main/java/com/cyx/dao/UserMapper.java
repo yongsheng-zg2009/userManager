@@ -10,4 +10,7 @@ import java.util.List;
 
 public interface UserMapper {
     public List<UserInfo>  userList();
+    
+    
+    
 }

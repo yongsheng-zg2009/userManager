@@ -4,10 +4,8 @@
 
 <mapper namespace="com.cyx.dao.UserMapper">
 
-
     <select id="userList" resultType="com.cyx.po.UserInfo">
         select id,username,nickname,gender,age,register_time registerTime from userinfo
     </select>
-
-
+    
 </mapper>
