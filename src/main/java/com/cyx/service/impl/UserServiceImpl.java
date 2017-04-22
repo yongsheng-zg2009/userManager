@@ -13,10 +13,21 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl  implements UserService{
+	
     @Autowired
     private UserMapper userMapper;
+    
     @Override
     public List<UserInfo> userList() {
         return userMapper.userList();
     }
+    
+    
+    //TODO: 用户的权限
+    
+    //TODO： 用户所在分组列表
+    
+    //TODO: 用户的角色列表
+    
+    
 }
