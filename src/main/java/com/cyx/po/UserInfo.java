@@ -1,4 +1,7 @@
 package com.cyx.po;
+
+import java.util.Date;
+
 /**
  * 用户基本信息
  * @author yongsheng
@@ -11,7 +14,7 @@ public class UserInfo {
 	private String nickName;
 	private String gender; // 性别
 	private Integer age;
-	private String registerTime;
+	private Date registerTime;
 
 	public Integer getAge() {
 		return age;
@@ -37,11 +40,11 @@ public class UserInfo {
 		this.nickName = nickName;
 	}
 
-	public String getRegisterTime() {
+	public Date getRegisterTime() {
 		return registerTime;
 	}
 
-	public void setRegisterTime(String registerTime) {
+	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
 	}
 
