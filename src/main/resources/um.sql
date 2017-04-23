@@ -85,7 +85,7 @@ COMMENT = '系统角色';
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `um`.`t_um_group_user` (
   `user_name` VARCHAR(100) NOT NULL,
-  `groudp_id` INT NOT NULL,
+  `group_id` INT NOT NULL,
   INDEX `fk_t_um_group_user_t_um_user_idx` (`user_name` ASC),
   INDEX `fk_t_um_group_user_t_um_group1_idx` (`groudp_id` ASC),
   CONSTRAINT `fk_t_um_group_user_t_um_user`
