@@ -6,7 +6,10 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
- * @author jiang
+ * 
+ * @author niyongsheng
+ * @version 创建时间：2017年4月23日 下午9:38:08 
+ * @mail yongsheng_zg2009@163.com
  */
 public class NetUtils {
     /**

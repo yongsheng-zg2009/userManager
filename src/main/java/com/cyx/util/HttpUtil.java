@@ -7,7 +7,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
- * Created by Administrator on 17/4/18.
+ * 
+ * @author niyongsheng
+ * @version 创建时间：2017年4月23日 下午9:38:22 
+ * @mail yongsheng_zg2009@163.com
  */
 public class HttpUtil {
     public static JSONObject getRequestJson(HttpServletRequest request){
