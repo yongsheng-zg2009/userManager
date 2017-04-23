@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyx.dao.PermissionMapper">
+
+    <select id="listAll" resultType="com.cyx.po.Permission">
+        SELECT 
+        	id AS id, 
+        	url AS url, 
+        	name AS name, 
+        	level AS level, 
+        	parent_id AS parentId
+         FROM t_um_permission;
+    </select>
+    
+    <insert id="inserPermission">
+    INSERT INTO
+    	t_um_permission ( url, name, level, parent_id, dt_create_time, dt_update_time)
+    VALUES
+    	(#{url}, #{name},#{level},#{parentId},NOW(), NOW());
+    </insert>
+    
+</mapper>
