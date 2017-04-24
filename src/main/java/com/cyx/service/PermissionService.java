@@ -9,7 +9,7 @@ import com.cyx.po.Permission;
 public interface PermissionService {
 	
 	//添加系统资源 
-	public int inserPermission(@Param("permission") Permission permission);
+	public int insertPermission(@Param("permission") Permission permission);
 	
 	// 获取所有的系统资源
 	public List<Permission> listAll();

@@ -14,7 +14,7 @@
          FROM t_um_permission;
     </select>
     
-    <insert id="inserPermission">
+    <insert id="insertPermission">
     INSERT INTO
     	t_um_permission ( url, name, level, parent_id, dt_create_time, dt_update_time)
     VALUES

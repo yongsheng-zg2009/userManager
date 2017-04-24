@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyx.dao.GroupRoleMapper">
+
+    <select id="listAll" resultType="com.cyx.po.GroupRole">
+        SELECT 
+        	group_id AS groupId, 
+        	role_id AS roleId
+         FROM t_um_group_role;
+    </select>
+    
+</mapper>

@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyx.dao.GroupMapper">
+
+    <select id="listAll" resultType="com.cyx.po.GroupInfo">
+        SELECT 
+        	id AS id, 
+        	code AS code, 
+        	name AS name, 
+        	brief AS brief, 
+        	level AS level,
+        	parent_id AS parentId
+         FROM t_um_group;
+    </select>
+    
+</mapper>

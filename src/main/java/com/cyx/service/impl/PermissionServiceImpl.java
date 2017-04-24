@@ -24,9 +24,9 @@ public class PermissionServiceImpl implements PermissionService{
 	private PermissionMapper permissionMapper;
 	
 	@Override
-	public int inserPermission(Permission permission) {
+	public int insertPermission(Permission permission) {
 		 
-		return permissionMapper.inserPermission(permission);
+		return permissionMapper.insertPermission(permission);
 	}
 
 	@Override
