@@ -2,7 +2,7 @@ package com.cyx.dao;
 
 import java.util.List;
 
-import com.cyx.po.RrolePermission;
+import com.cyx.po.RolePermission;
 
 public interface RolePermissionMapper {
 	
@@ -10,6 +10,6 @@ public interface RolePermissionMapper {
 	 * 获取所有的组
 	 * @return
 	 */
-	public List<RrolePermission> listAll();
+	public List<RolePermission> listAll();
 
 }

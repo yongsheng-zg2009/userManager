@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 创建时间：2017年4月23日 上午11:36:49 
  * @mail yongsheng_zg2009@163.com
  */
-public class RrolePermission implements Serializable{
+public class RolePermission implements Serializable{
 
 	/**
 	 * 
