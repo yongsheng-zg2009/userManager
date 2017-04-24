@@ -17,7 +17,7 @@ import com.cyx.service.PermissionService;
  * @version 创建时间：2017年4月23日 下午1:39:43 
  * @mail yongsheng_zg2009@163.com
  */
-@Service("userService")
+@Service("permissionService")
 public class PermissionServiceImpl implements PermissionService{
 
 	@Autowired

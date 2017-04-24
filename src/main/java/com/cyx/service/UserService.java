@@ -1,7 +1,9 @@
 package com.cyx.service;
 
 import java.util.List;
+import java.util.Set;
 
+import com.cyx.po.Permission;
 import com.cyx.po.UserInfo;
 
 /**
@@ -9,6 +11,17 @@ import com.cyx.po.UserInfo;
  */
 public interface UserService {
 	
-        public List<UserInfo> userList();
+	/**
+	 * 获取所有的用户
+	 * 
+	 * 不对外提供，做测试用的
+	 */
+	public List<UserInfo> userList();
+	
+	/**
+	 * 获取用户的权限
+	 * @param userName
+	 */
+	public List<Permission> getUserPermissions(String userName);
         
 }
