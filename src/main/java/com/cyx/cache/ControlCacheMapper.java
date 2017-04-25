@@ -47,13 +47,13 @@ public class ControlCacheMapper implements CommandLineRunner {
 	private final static Map<Integer, Permission>  SYS_PERMISSION_MAP = new HashMap<Integer, Permission>();
 	
 	@Autowired
+	private PermissionMapper permissionMapper;
+	@Autowired
 	private RolePermissionMapper rolePermissionMapper;
 	@Autowired
 	private GroupRoleMapper groupRoleMapper;
 	@Autowired
 	private GroupUserMapper groupUserMapper;
-	@Autowired
-	private PermissionMapper permissionMapper;
 	@Autowired
 	private SystemRoleMapper systemRoleMapper;
 	@Autowired
@@ -66,21 +66,17 @@ public class ControlCacheMapper implements CommandLineRunner {
 	}
 	
 	public void initPermissions(){
-		//TODO: 日志打印
+		//TODO: 日志打印 开始--------------------------
 
 		// 1、 获取系统所有的权限信息
 		INIT_SYS_PERMISSION_MAP();
-		INIT_ROLE_PERMISSION_MAP();
-		
-		rolePermissionMapper.listAll();
-		
 		
 		// 2、获取所有的系统角色，并组装角色权限MAP
+		INIT_ROLE_PERMISSION_MAP();
 		
 		// 3、获取所有的组，并组装组的权限， 组装组的角色
 		
-		// 4、获取所有的分组的用户，并组用户的权限，角色，以及组
-		
+		// 4、获取所有的分组的用户，并组用户的权限，角色，以及组 
 	}
 	
 	
@@ -94,19 +90,47 @@ public class ControlCacheMapper implements CommandLineRunner {
 		}
 	}
 	
+	public void INIT_GROUP_ROLE_MAP(){
+		
+		List<RolePermission>  temList = rolePermissionMapper.listAll();
+		RolePermission rp = null;
+		if(null != temList && !temList.isEmpty()){
+			for(int i = 0, size = temList.size(); i < size; i++ ){
+				rp = temList.get(i);
+				
+				Map<Integer, Permission> map = ROLE_PERMISSION_MAP.get(rp.getRoleId());
+			
+				if(null == map) {
+					map = new HashMap<Integer, Permission>();
+					ROLE_PERMISSION_MAP.put(rp.getRoleId(), map);
+				}
+				map.put(rp.getPermissionId(), SYS_PERMISSION_MAP.get(rp.getPermissionId()));
+			}
+		}
+	}
+	
+ 
+	
+	
+	
 	public void INIT_ROLE_PERMISSION_MAP(){
 		
 		List<RolePermission>  temList = rolePermissionMapper.listAll();
-		if(null != temList){
+		RolePermission rp = null;
+		if(null != temList && !temList.isEmpty()){
+			for(int i = 0, size = temList.size(); i < size; i++ ){
+				rp = temList.get(i);
+				
+				Map<Integer, Permission> map = ROLE_PERMISSION_MAP.get(rp.getRoleId());
 			
-			
-			
-//			ROLE_PERMISSION_MAP.put(key, value);
+				if(null == map) {
+					map = new HashMap<Integer, Permission>();
+					ROLE_PERMISSION_MAP.put(rp.getRoleId(), map);
+				}
+				map.put(rp.getPermissionId(), SYS_PERMISSION_MAP.get(rp.getPermissionId()));
+			}
 		}
-		
-
 	}
-	
 	
 	public static Map<Integer, Map<Integer, Permission>> ROLE_PERMISSION_MAP(){
 		
@@ -137,12 +161,4 @@ public class ControlCacheMapper implements CommandLineRunner {
 		
 		return USER_GROUP_MAP;
 	}
-
-
-	
-	
-	
-	
-	
-	
 }
