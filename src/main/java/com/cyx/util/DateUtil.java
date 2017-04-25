@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -371,4 +372,15 @@ public class DateUtil {
         String dateString = date!=null?format.format(date):"";
         return dateString;
     };
+    
+   
+    
+    public static void main(String[] args){
+    	
+    	System.out.println(UUID.randomUUID());
+    }
+    
+    
+    
+    
 }
