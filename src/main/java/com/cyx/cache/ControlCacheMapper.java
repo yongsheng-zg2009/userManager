@@ -13,6 +13,8 @@ import com.cyx.dao.PermissionMapper;
 import com.cyx.dao.RolePermissionMapper;
 import com.cyx.dao.SystemRoleMapper;
 import com.cyx.dao.UserMapper;
+import com.cyx.po.GroupRole;
+import com.cyx.po.GroupUser;
 import com.cyx.po.Permission;
 import com.cyx.po.RolePermission;
 
@@ -32,7 +34,7 @@ public class ControlCacheMapper implements CommandLineRunner {
 	private final static Map<Integer, Map<Integer, Permission>> GROUP_PERMISSION_MAP = new HashMap<Integer, Map<Integer, Permission>>();
 
 	/** 用户权限*/
-	private final static Map<Integer, Map<Integer, Permission>> USER_PERMISSION_MAP = new HashMap<Integer, Map<Integer, Permission>>();
+	private final static Map<String, Map<Integer, Permission>> USER_PERMISSION_MAP = new HashMap<String, Map<Integer, Permission>>();
 	
 	/** 小组角色列表*/
 	private final static Map<Integer, Map<Integer, String>> GROUP_ROLE_MAP = new HashMap<Integer, Map<Integer, String>>();
@@ -67,20 +69,20 @@ public class ControlCacheMapper implements CommandLineRunner {
 	
 	public void initPermissions(){
 		//TODO: 日志打印 开始--------------------------
-
-		// 1、 获取系统所有的权限信息
+		// 1、 将系统中的权限加载到内存
 		INIT_SYS_PERMISSION_MAP();
-		
-		// 2、获取所有的系统角色，并组装角色权限MAP
+		// 2、将角色的权限加载到内存
 		INIT_ROLE_PERMISSION_MAP();
-		
-		// 3、获取所有的组，并组装组的权限， 组装组的角色
-		
-		// 4、获取所有的分组的用户，并组用户的权限，角色，以及组 
+		// 3、将组的权限加载到内存
+		INIT_GROUP_PERMISSION_MAP();
+		// 4、将用户的权限加载到内存中
+		INIT_USER_PERMISSION_MAP();
 	}
 	
-	
-	public void INIT_SYS_PERMISSION_MAP(){
+	/**
+	 * 将系统的资源加载到内存
+	 */
+	private void INIT_SYS_PERMISSION_MAP(){
 		
 		List<Permission> permissions = permissionMapper.listAll();
 		if(null != permissions && !permissions.isEmpty()){
@@ -90,29 +92,9 @@ public class ControlCacheMapper implements CommandLineRunner {
 		}
 	}
 	
-	public void INIT_GROUP_ROLE_MAP(){
-		
-		List<RolePermission>  temList = rolePermissionMapper.listAll();
-		RolePermission rp = null;
-		if(null != temList && !temList.isEmpty()){
-			for(int i = 0, size = temList.size(); i < size; i++ ){
-				rp = temList.get(i);
-				
-				Map<Integer, Permission> map = ROLE_PERMISSION_MAP.get(rp.getRoleId());
-			
-				if(null == map) {
-					map = new HashMap<Integer, Permission>();
-					ROLE_PERMISSION_MAP.put(rp.getRoleId(), map);
-				}
-				map.put(rp.getPermissionId(), SYS_PERMISSION_MAP.get(rp.getPermissionId()));
-			}
-		}
-	}
-	
- 
-	
-	
-	
+	/**
+	 * 将角色的权限加载到内存
+	 */
 	public void INIT_ROLE_PERMISSION_MAP(){
 		
 		List<RolePermission>  temList = rolePermissionMapper.listAll();
@@ -120,16 +102,58 @@ public class ControlCacheMapper implements CommandLineRunner {
 		if(null != temList && !temList.isEmpty()){
 			for(int i = 0, size = temList.size(); i < size; i++ ){
 				rp = temList.get(i);
-				
-				Map<Integer, Permission> map = ROLE_PERMISSION_MAP.get(rp.getRoleId());
-			
-				if(null == map) {
-					map = new HashMap<Integer, Permission>();
-					ROLE_PERMISSION_MAP.put(rp.getRoleId(), map);
+				Map<Integer, Permission> valMap = ROLE_PERMISSION_MAP.get(rp.getRoleId());
+				if(null == valMap) {
+					valMap = new HashMap<Integer, Permission>();
+					ROLE_PERMISSION_MAP.put(rp.getRoleId(), valMap);
 				}
-				map.put(rp.getPermissionId(), SYS_PERMISSION_MAP.get(rp.getPermissionId()));
+				valMap.put(rp.getPermissionId(), SYS_PERMISSION_MAP.get(rp.getPermissionId()));
 			}
 		}
+	}
+
+	/**
+	 * 将组的权限加载到内存
+	 */
+	public void INIT_GROUP_PERMISSION_MAP(){
+		
+		List<GroupRole> list = groupRoleMapper.listAll();
+		
+		// 一个组拥有哪些权限
+		GroupRole gr = null;
+		if(null != list && !list.isEmpty()){
+			for(int i = 0, size = list.size(); i < size; i ++ ){
+				gr = list.get(i);
+
+				Map<Integer, Permission> valMap = GROUP_PERMISSION_MAP.get(gr.getRoleId());
+				
+				if(valMap != null){
+					valMap = new HashMap<Integer, Permission>();
+					GROUP_PERMISSION_MAP.put(gr.getGroupId(), valMap);
+				}
+				valMap.putAll(ROLE_PERMISSION_MAP.get(gr.getRoleId())); 
+			}
+		}
+	}
+	
+	private void INIT_USER_PERMISSION_MAP(){
+		
+		
+		List<GroupUser> list = groupUserMapper.listAll();
+		GroupUser gu = null;
+		if(null != list && !list.isEmpty()){
+			for(int i = 0, size = list.size(); i < size; i ++ ){
+				gu = list.get(i);
+				Map<Integer, Permission> map = USER_PERMISSION_MAP.get(gu.getGroupId());
+				
+				if(map != null){
+					map = new HashMap<Integer, Permission>();
+					USER_PERMISSION_MAP.put(gu.getUserName(), map);
+				}
+				map.putAll(GROUP_PERMISSION_MAP.get(gu.getGroupId())); 
+			}
+		}
+		
 	}
 	
 	public static Map<Integer, Map<Integer, Permission>> ROLE_PERMISSION_MAP(){
@@ -142,7 +166,7 @@ public class ControlCacheMapper implements CommandLineRunner {
 		return GROUP_PERMISSION_MAP;
 	}
 	
-	public static Map<Integer, Map<Integer, Permission>> USER_PERMISSION_MAP(){ 
+	public static Map<String, Map<Integer, Permission>> USER_PERMISSION_MAP(){ 
 		
 		return USER_PERMISSION_MAP;
 	}
