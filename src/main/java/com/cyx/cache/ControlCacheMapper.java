@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import com.cyx.dao.GroupRoleMapper;
 import com.cyx.dao.GroupUserMapper;
@@ -25,6 +26,7 @@ import com.cyx.po.RolePermission;
  * @version 创建时间：2017年4月24日 下午9:47:25 
  * @mail yongsheng_zg2009@163.com
  */
+@Component
 public class ControlCacheMapper implements CommandLineRunner {
 	
 	/** 角色权限*/
@@ -69,6 +71,7 @@ public class ControlCacheMapper implements CommandLineRunner {
 	
 	public void initPermissions(){
 		//TODO: 日志打印 开始--------------------------
+		System.out.println("ControlCacheMapper数据输入：------------------------");
 		// 1、 将系统中的权限加载到内存
 		INIT_SYS_PERMISSION_MAP();
 		// 2、将角色的权限加载到内存
@@ -77,6 +80,7 @@ public class ControlCacheMapper implements CommandLineRunner {
 		INIT_GROUP_PERMISSION_MAP();
 		// 4、将用户的权限加载到内存中
 		INIT_USER_PERMISSION_MAP();
+		System.out.println("ControlCacheMapper数据输入：------------------------end");
 	}
 	
 	/**
