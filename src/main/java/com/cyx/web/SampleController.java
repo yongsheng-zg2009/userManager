@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cyx.helper.UserHelper;
 import com.cyx.po.UserInfo;
 import com.cyx.service.PermissionService;
 import com.cyx.service.UserService;
@@ -27,7 +28,6 @@ public class SampleController {
     
     @RequestMapping("/1/")
     Object test1(){
-    	
     	return permissionService.listAll();
     }
 }

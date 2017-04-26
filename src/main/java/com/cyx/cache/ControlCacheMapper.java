@@ -29,6 +29,8 @@ import com.cyx.po.RolePermission;
 @Component
 public class ControlCacheMapper implements CommandLineRunner {
 	
+	 
+	
 	/** 角色权限*/
 	private final static Map<Integer, Map<Integer, Permission>> ROLE_PERMISSION_MAP = new HashMap<Integer, Map<Integer, Permission>>();
 
