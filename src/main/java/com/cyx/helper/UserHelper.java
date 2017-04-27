@@ -28,7 +28,6 @@ public class UserHelper {
 			Map<Integer, Permission> map =  ControlCacheMapper.USER_PERMISSION_MAP().get(userName);
 			for(Permission p: map.values()){
 				if(url.trim().equals(p.getUrl().trim())){
-					
 					hasPermission = true;
 				}
 			}
